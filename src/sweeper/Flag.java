@@ -6,7 +6,6 @@ public class Flag {
 
     Flag() {
         flagMap = new Matrix(Box.CLOSED);
-        flagMap.set(Box.OPENED, new Coord(4, 4));
     }
 
     Box get(Coord coord) {
@@ -21,13 +20,13 @@ public class Flag {
         flagMap.set(Box.CLOSED, coord);
     }
 
-    public void setFlagedToBox(Coord coord) {
+    public void setFlaggedToBox(Coord coord) {
         flagMap.set(Box.FLAGED, coord);
     }
 
     public void toggleFlaggedToBox(Coord coord) {
         if (flagMap.get(coord) != Box.FLAGED)
-            setFlagedToBox(coord);
+            setFlaggedToBox(coord);
         else
             setClosedToBox(coord);
     }

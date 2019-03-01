@@ -12,6 +12,7 @@ public class MineSweeper extends JFrame
 {
     private Game game;
     private JPanel panel;
+    private JLabel label;
     private final int COLS = 9;
     private final int ROWS = 9;
     private final int BOMBS = 10;
@@ -29,16 +30,22 @@ public class MineSweeper extends JFrame
         setImages();
         initPanel();
         initFrame();
+        initLabel();
+    }
+
+    private void initLabel() {
+        label = new JLabel("Welcome!");
+        add(label, BorderLayout.SOUTH);
     }
 
     private void initFrame() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mine Sweaper");
-        setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
         setIconImage(getImage("icon"));
         pack();
+        setLocationRelativeTo(null);
     }
 
     private void initPanel() {
@@ -67,6 +74,10 @@ public class MineSweeper extends JFrame
                 if (e.getButton() == MouseEvent.BUTTON3) {
                     game.pressRightButton(coord);
                 }
+                if (e.getButton() == MouseEvent.BUTTON2) {
+                    game.start();
+                }
+                label.setText(getMessage());
                 panel.repaint();
             }
         });
@@ -86,5 +97,14 @@ public class MineSweeper extends JFrame
         String filename = "img/" + name.toLowerCase() + ".png";
         ImageIcon icon = new ImageIcon (getClass().getResource(filename));
         return icon.getImage();
+    }
+
+    public String getMessage() {
+        switch (game.getState()) {
+            case PLAYED: return "Think twice!";
+            case BOMBED: return "You lose!";
+            case WINNER: return "Congratulations!";
+            default: return "";
+        }
     }
 }
