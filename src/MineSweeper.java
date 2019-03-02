@@ -102,8 +102,8 @@ public class MineSweeper extends JFrame
     public String getMessage() {
         switch (game.getState()) {
             case PLAYED: return "Think twice!";
-            case BOMBED: return "You lose!";
-            case WINNER: return "Congratulations!";
+            case BOMBED: return"You lose! Press mouse 3 for retry.";
+            case WINNER: return "Congratulations! Press mouse 3 for retry.";
             default: return "";
         }
     }

@@ -3,9 +3,11 @@ package sweeper;
 public class Flag {
 
     private Matrix flagMap;
+    private int closedBoxesCount;
 
     Flag() {
         flagMap = new Matrix(Box.CLOSED);
+        closedBoxesCount = Ranges.getSize().x * Ranges.getSize().y;
     }
 
     Box get(Coord coord) {
@@ -14,6 +16,7 @@ public class Flag {
 
     public void setOpenedToBox(Coord coord) {
         flagMap.set(Box.OPENED, coord);
+        closedBoxesCount--;
     }
 
     public void setClosedToBox(Coord coord) {
@@ -29,5 +32,17 @@ public class Flag {
             setFlaggedToBox(coord);
         else
             setClosedToBox(coord);
+    }
+
+    public int getCountOfClosedBoxes() {
+        return closedBoxesCount;
+    }
+
+    public void setBombedToBox(Coord coord) {
+        flagMap.set(Box.BOMBED, coord);
+    }
+
+    public void setFalseFlag(Coord coord) {
+        flagMap.set(Box.NOBOMB, coord);
     }
 }
